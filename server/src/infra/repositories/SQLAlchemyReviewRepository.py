@@ -1,17 +1,35 @@
 from core.entities.Review import Review
 from core.interfaces.IReviewRepository import IReviewRepository
+from infra.db.model.review_model import ReviewModel
+from infra.mappers.ReviewMapper import ReviewMapper
 
-
-class SQLAlchemyReviewRepositorio(IReviewRepository):
+class SQLAlchemyReviewRepositorio( IReviewRepository):
     def __init__(self, session):
         self.session = session
 
-    def salva(self, review: Review) -> None:
-        self.session.add(review)
+    def salva(self, review: Review) -> bool:
+        model = ReviewMapper.to_model(review)
+
+        self.session.add(model)
         self.session.commit()
 
-    def encontra_por_materia(self, id_materia: int) -> list[Review]:
-        return (self.session.query(Review).filter_by(id_materia=id_materia).all())
+        return True
 
-    def encontra_por_usuario(self, id_aluno: int) -> list[Review]:
-        return (self.session.query(Review).filter_by(id_aluno=id_aluno).all())
+    def encontra_por_id( self, id: int) -> Review:
+
+        model = (self.session.query(ReviewModel).filter_by(id=id).first())
+
+        if not model:
+            return None
+
+        return ReviewMapper.to_entity(model)
+
+    def encontra_por_materia(self, id_materia: int) -> list[Review]:
+        models = (self.session.query(ReviewModel).filter_by(id_materia=id_materia).all())
+        
+        return [ReviewMapper.to_entity(model) for model in models]
+
+    def encontra_por_aluno(self, id_aluno: int) -> list[Review]:
+        models = (self.session.query(ReviewModel).filter_by(id_aluno=id_aluno).all())
+
+        return [ReviewMapper.to_entity(model) for model in models]
