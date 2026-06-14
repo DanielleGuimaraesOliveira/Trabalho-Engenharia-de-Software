@@ -14,7 +14,7 @@ class ReviewSchema(BaseModel):
 
 class ReviewBuscaSchema(BaseModel):
     """Busca review por id."""
-    id: int
+    materia_id: int
 
 class ListagemReviewsSchema(BaseModel):
     """Listagem de reviews."""
@@ -27,7 +27,7 @@ class ReviewViewSchema(BaseModel):
     nota: int
     id_aluno: int
     id_materia: int
-    
+
 def apresenta_reviews(reviews: List[Review]) -> dict:
     return {
         "reviews": [

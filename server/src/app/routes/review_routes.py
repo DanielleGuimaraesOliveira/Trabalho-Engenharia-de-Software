@@ -5,6 +5,7 @@ from src.app.schemas import (
     ReviewSchema,
     ListagemReviewsSchema,
     ReviewViewSchema,
+    ReviewBuscaSchema,
     apresenta_review,
     apresenta_reviews
 )
@@ -26,11 +27,12 @@ def register_review_routes(app, publica_use_case: PublicarReviewUseCase, lista_u
         except Exception as error:
             return {"message": str(error)}, 400
 
-    @app.get("/reviews", tags=[review_tag], responses={ "200": ListagemReviewsSchema})
-    def lista_reviews():
-        reviews = lista_use_case.executa()
+    @app.get("/reviews", tags=[review_tag], responses={"200": ListagemReviewsSchema})
+    def lista_reviews(query: ReviewBuscaSchema):
+
+        reviews = (lista_use_case.executa(query.materia_id))
 
         if not reviews:
             return {"reviews": []}, 200
-        
+
         return apresenta_reviews(reviews), 200
