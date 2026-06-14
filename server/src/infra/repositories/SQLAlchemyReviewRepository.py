@@ -1,7 +1,7 @@
-from core.entities.Review import Review
-from core.interfaces.IReviewRepository import IReviewRepository
-from infra.db.model.review_model import ReviewModel
-from infra.mappers.ReviewMapper import ReviewMapper
+from src.core.entities.Review import Review
+from src.core.interfaces.IReviewRepository import IReviewRepository
+from src.infra.db.model.review_model import ReviewModel
+from src.infra.mappers.ReviewMapper import ReviewMapper
 
 class SQLAlchemyReviewRepositorio( IReviewRepository):
     def __init__(self, session):
@@ -33,3 +33,4 @@ class SQLAlchemyReviewRepositorio( IReviewRepository):
         models = (self.session.query(ReviewModel).filter_by(id_aluno=id_aluno).all())
 
         return [ReviewMapper.to_entity(model) for model in models]
+    

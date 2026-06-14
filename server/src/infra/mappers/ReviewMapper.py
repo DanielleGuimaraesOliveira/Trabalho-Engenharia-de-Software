@@ -1,5 +1,5 @@
-from core.entities.Review import Review
-from infra.db.model.review_model import ReviewModel
+from src.core.entities.Review import Review
+from src.infra.db.model.review_model import ReviewModel
 
 
 

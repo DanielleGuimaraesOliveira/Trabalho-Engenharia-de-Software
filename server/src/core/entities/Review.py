@@ -1,5 +1,5 @@
-from core.entities.Aluno import Aluno
-from core.entities.Materia import Materia
+from src.core.entities.Aluno import Aluno
+from src.core.entities.Materia import Materia
 
 
 class Review:

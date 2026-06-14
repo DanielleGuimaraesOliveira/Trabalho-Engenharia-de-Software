@@ -9,12 +9,12 @@ from src.app.schemas import (
     apresenta_reviews
 )
 from src.core.dto.ReviewDTO import ReviewDTO
-from src.core.use_case.PublicaReviewUseCase import PublicaReviewUseCase
-from src.core.use_case.ListaTodasAsReviewsUseCase import ListaTodasAsReviewsUseCase
+from src.core.use_case.PublicaReviewUseCase import PublicarReviewUseCase
+from src.core.use_case.ListaTodasAsReviewsUseCase import ListaReviewsUseCase
 
 review_tag = Tag(name="Review", description="Publicação e listagem de reviews")
 
-def register_review_routes(app, publica_use_case: PublicaReviewUseCase, lista_use_case: ListaTodasAsReviewsUseCase):
+def register_review_routes(app, publica_use_case: PublicarReviewUseCase, lista_use_case: ListaReviewsUseCase):
     @app.post("/review", tags=[review_tag], responses={ "200": ReviewViewSchema, "400": ErrorSchema})
     def publica_review(form: ReviewSchema):
         try:

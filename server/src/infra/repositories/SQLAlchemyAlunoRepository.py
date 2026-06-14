@@ -1,7 +1,7 @@
-from core.entities.Aluno import Aluno
-from core.interfaces.IAlunoRepository import IAlunoRepository
-from infra.db.model.aluno_model import AlunoModel
-from infra.mappers.AlunoMapper import AlunoMapper
+from src.core.entities.Aluno import Aluno
+from src.core.interfaces.IAlunoRepository import IAlunoRepository
+from src.infra.db.model.aluno_model import AlunoModel
+from src.infra.mappers.AlunoMapper import AlunoMapper
 
 class SQLAlchemyAlunoRepositorio(IAlunoRepository):
     def __init__(self, session):

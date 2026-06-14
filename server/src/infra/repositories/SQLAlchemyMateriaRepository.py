@@ -1,7 +1,7 @@
-from core.entities.Materia import Materia
-from core.interfaces.IMateriaRepository import IMateriaRepository
-from infra.db.model.materia_model import MateriaModel
-from infra.mappers.MateriaMapper import MateriaMapper
+from src.core.entities.Materia import Materia
+from src.core.interfaces.IMateriaRepository import IMateriaRepository
+from src.infra.db.model.materia_model import MateriaModel
+from src.infra.mappers.MateriaMapper import MateriaMapper
 
 class SQLAlchemyMateriaRepositorio(IMateriaRepository):
     def __init__(self, session):
@@ -31,7 +31,7 @@ class SQLAlchemyMateriaRepositorio(IMateriaRepository):
 
         return MateriaMapper.to_entity(model)
 
-    def lista_todas(self) -> list[Materia]:
+    def retorna_todas_as_materias(self) -> list[Materia]:
 
         models = (self.session.query(MateriaModel).all())
 

@@ -1,5 +1,5 @@
-from core.entities.Aluno import Aluno
-from infra.db.model.aluno_model import AlunoModel
+from src.core.entities.Aluno import Aluno
+from src.infra.db.model.aluno_model import AlunoModel
 
 
 class AlunoMapper:

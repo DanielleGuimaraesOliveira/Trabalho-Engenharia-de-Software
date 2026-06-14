@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from core.entities.Review import Review
+from src.core.entities.Review import Review
 
 
 class IReviewRepository(ABC):
@@ -14,5 +14,5 @@ class IReviewRepository(ABC):
         pass
 
     @abstractmethod
-    def encontra_por_usuario(self, id_aluno: int) -> list[Review]:
+    def encontra_por_aluno(self, id_aluno: int) -> list[Review]:
         pass

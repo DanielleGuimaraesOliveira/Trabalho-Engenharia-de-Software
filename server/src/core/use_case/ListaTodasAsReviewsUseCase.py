@@ -1,8 +1,8 @@
-from core.dto.ReviewDTO import ReviewDTO
-from core.interfaces.IReviewRepository import IReviewRepository
-from core.interfaces.IMateriaRepository import IMateriaRepository
+from src.core.dto.ReviewDTO import ReviewDTO
+from src.core.interfaces.IReviewRepository import IReviewRepository
+from src.core.interfaces.IMateriaRepository import IMateriaRepository
 
-class ListaReviewsUserCase:
+class ListaReviewsUseCase:
 
     def __init__(self, repositorio_review: IReviewRepository, repositorio_materia: IMateriaRepository):
         self.repositorio_review = repositorio_review

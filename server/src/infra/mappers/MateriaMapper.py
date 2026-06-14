@@ -1,5 +1,5 @@
-from core.entities.Materia import Materia
-from infra.db.model.materia_model import MateriaModel
+from src.core.entities.Materia import Materia
+from src.infra.db.model.materia_model import MateriaModel
 
 
 

@@ -1,5 +1,5 @@
 import re
-from core.enums.departamento import Departamento
+from src.core.enums.departamento import Departamento
 
 class Materia:
 

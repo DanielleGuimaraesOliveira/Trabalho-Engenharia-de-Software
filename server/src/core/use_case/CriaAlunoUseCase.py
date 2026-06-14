@@ -1,5 +1,5 @@
-from core.entities.Aluno import Aluno
-from core.interfaces.IAlunoRepository import IAlunoRepository
+from src.core.entities.Aluno import Aluno
+from src.core.interfaces.IAlunoRepository import IAlunoRepository
 
 
 class CriaAlunoUseCase:

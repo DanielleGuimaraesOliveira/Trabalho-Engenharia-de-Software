@@ -21,6 +21,13 @@ class ListagemReviewsSchema(BaseModel):
 
     reviews: List[ReviewSchema]
 
+class ReviewViewSchema(BaseModel):
+    id: int
+    comentario: str
+    nota: int
+    id_aluno: int
+    id_materia: int
+    
 def apresenta_reviews(reviews: List[Review]) -> dict:
     return {
         "reviews": [

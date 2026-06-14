@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from core.entities.Materia import Materia
+from src.core.entities.Materia import Materia
 
 
 class IMateriaRepository(ABC):

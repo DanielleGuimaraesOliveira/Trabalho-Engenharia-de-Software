@@ -1,5 +1,5 @@
-from core.interfaces.IAlunoRepository import IAlunoRepository
-from core.interfaces.ITokenService import ITokenService
+from src.core.interfaces.IAlunoRepository import IAlunoRepository
+from src.core.interfaces.ITokenService import ITokenService
 
 class AutenticaAlunoUseCase:
 

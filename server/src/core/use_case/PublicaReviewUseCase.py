@@ -1,9 +1,9 @@
-from core.entities.Review import Review
-from core.interfaces.IAlunoRepository import IAlunoRepository
-from core.interfaces.IReviewRepository import IReviewRepository
-from core.interfaces.IMateriaRepository import IMateriaRepository
+from src.core.entities.Review import Review
+from src.core.interfaces.IAlunoRepository import IAlunoRepository
+from src.core.interfaces.IReviewRepository import IReviewRepository
+from src.core.interfaces.IMateriaRepository import IMateriaRepository
 
-class PublicarReviewUserCase:
+class PublicarReviewUseCase:
 
     def __init__(self, repositorio_aluno: IAlunoRepository, repositorio_materia: IMateriaRepository, repositorio_review: IReviewRepository):
         self.repositorio_aluno = repositorio_aluno
