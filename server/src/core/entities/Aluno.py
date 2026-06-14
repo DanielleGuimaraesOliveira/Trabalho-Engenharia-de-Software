@@ -1,5 +1,5 @@
 class Aluno:
-    PUC_EMAIL_DOMAIN = "@aluno.puc-rio.br"
+    PUC_EMAIL_DOMINIO = "@aluno.puc-rio.br"
 
     def __init__(self, id: int, nome: str, email: str, senhaHash: str):
         self.__validaNome(nome)
@@ -17,7 +17,7 @@ class Aluno:
     def __validaEmail(self, email: str):
         email = email.strip().lower()
 
-        if not email.endswith(self.PUC_EMAIL_DOMAIN):
+        if not email.endswith(self.PUC_EMAIL_DOMINIO):
             raise ValueError(
                 "O email deve ser institucional da PUC-Rio"
             )
