@@ -1,7 +1,7 @@
 from core.interfaces.IAlunoRepository import IAlunoRepository
 from core.interfaces.ITokenService import ITokenService
 
-class AutenticacaoAlunoUserCase:
+class AutenticaAlunoUseCase:
 
     def __init__(self, repositorio_aluno: IAlunoRepository, token_service: ITokenService, hash_service ):
         self.repositorio_aluno = repositorio_aluno
