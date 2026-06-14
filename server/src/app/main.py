@@ -30,6 +30,9 @@ info = Info(title="API Reviews", version="1.0.0")
 
 app = OpenAPI(__name__, info=info)
 
+@app.get("/")
+def home():
+    return { "message": "API funcionando"}, 200
 # =========================================
 # BANCO
 # =========================================
