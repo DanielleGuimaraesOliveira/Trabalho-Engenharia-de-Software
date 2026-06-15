@@ -12,9 +12,9 @@ aluno_tag = Tag(name="Aluno", description="Cadastro e autenticação de alunos")
 
 def register_aluno_routes(app,cria_aluno_use_case: CriaAlunoUseCase, auth_use_case: AutenticaAlunoUseCase):
     @app.post("/aluno", tags=[aluno_tag], responses={"200": AlunoViewSchema, "400": ErrorSchema })
-    def cria_aluno(form: AlunoSchema):
+    def cria_aluno(body: AlunoSchema):
         try:
-            dto = AlunoDTO(nome=form.nome, email=form.email, senha=form.senha)
+            dto = AlunoDTO(nome=body.nome, email=body.email, senha=body.senha)
             cria_aluno_use_case.executa(dto)
 
             return {"message": "Aluno criado com sucesso" }, 200
