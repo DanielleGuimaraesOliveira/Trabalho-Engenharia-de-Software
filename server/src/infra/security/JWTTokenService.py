@@ -8,7 +8,7 @@ class JWTTokenService:
     def gerar_token(self, aluno_id: int) -> str:
         payload = {
             "sub": aluno_id,
-            "exp": datetime.now(timezone.utc()).ri + timedelta(hours=2)
+            "exp": datetime.now(timezone.utc) + timedelta(hours=2)
         }
 
         return jwt.encode(payload,

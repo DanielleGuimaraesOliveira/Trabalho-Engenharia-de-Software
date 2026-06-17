@@ -23,9 +23,9 @@ def register_aluno_routes(app,cria_aluno_use_case: CriaAlunoUseCase, auth_use_ca
             return {"message": str(error)}, 400
 
     @app.post("/login", tags=[aluno_tag], responses={"200": AlunoViewSchema, "401": ErrorSchema})
-    def login(form: LoginSchema):
+    def login(body: LoginSchema):
         try:
-            dto = LoginDTO( email=form.email, senha=form.senha)
+            dto = LoginDTO( email=body.email, senha=body.senha)
             resultado = auth_use_case.executa(dto)
 
             return resultado, 200

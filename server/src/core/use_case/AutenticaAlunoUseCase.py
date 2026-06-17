@@ -14,7 +14,7 @@ class AutenticaAlunoUseCase:
         if not aluno:
             raise Exception("Email inválido")
 
-        senha_valida = (self.hash_service.verificar(aluno.senha, dto.senha))
+        senha_valida = (self.hash_service.verificar(aluno.senhaHash, dto.senha))
 
         if not senha_valida:
             raise Exception("Senha inválida")

@@ -1,11 +1,11 @@
 class Aluno:
     PUC_EMAIL_DOMINIO = "@aluno.puc-rio.br"
 
-    def __init__(self, nome: str, email: str, senhaHash: str):
+    def __init__(self, nome: str, email: str, senhaHash: str, id: int=0):
         self.__validaNome(nome)
         self.__validaEmail(email)
 
-        self.id = 0
+        self.id = id
         self.nome = nome
         self.email = email
         self.senhaHash = senhaHash

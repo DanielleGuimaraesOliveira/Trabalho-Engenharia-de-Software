@@ -11,4 +11,4 @@ class AlunoMapper:
     
     @staticmethod
     def to_entity(model: AlunoModel) -> Aluno:
-        return Aluno(id=model.id, nome=model.nome, email=model.email, senha=model.senha)
+        return Aluno(id=model.id, nome=model.nome, email=model.email, senhaHash=model.senha)
