@@ -1,0 +1,199 @@
+:root{
+    --bg: #0b0c16;
+    --bg-soft: #11132a;
+    --panel: #14162f;
+    --card: #161a35;
+    --border: #262a4d;
+    --text: #f2f2f7;
+    --muted: #9a9cc0;
+    --accent: #7c6cf0;
+    --accent-2: #5ec8f2;
+}
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+  }
+
+  .navbar-academicbox{
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--border);
+    padding: .9rem 1.25rem;
+  }
+
+  .brand-mark{
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    flex-shrink: 0;
+  }
+
+  .brand-name{
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: .2px;
+  }
+
+  .nav-link-academic{
+    color: var(--text) !important;
+    opacity: .85;
+    font-size: .92rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .4rem .6rem !important;
+  }
+  .nav-link-academic:hover{ opacity: 1; }
+
+  .btn-entrar{
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    font-size: .92rem;
+    font-weight: 500;
+    padding: .45rem 1rem;
+    border-radius: .5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+  }
+  .btn-entrar:hover{ background: #6b5ce0; color: #fff; }
+
+  .page-title{
+    font-weight: 600;
+    letter-spacing: .2px;
+  }
+  .page-subtitle{
+    color: var(--muted);
+    font-size: .95rem;
+  }
+
+  .search-wrap{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: .9rem;
+    padding: 1.1rem;
+  }
+
+  .form-control-search{
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: .6rem .9rem;
+  }
+  .form-control-search::placeholder{ color: var(--muted); }
+  .form-control-search:focus{
+    background: var(--bg-soft);
+    color: var(--text);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 .2rem rgba(124,108,240,.25);
+  }
+
+  .input-icon{
+    color: var(--muted);
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-right: none;
+  }
+
+  .btn-filter{
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: .5rem;
+  }
+  .btn-filter:hover{ color: var(--text); background: var(--card); }
+
+  .subject-card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: .75rem;
+    padding: 1.1rem 1.25rem;
+    height: 100%;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .subject-card:hover{
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .subject-title{
+    font-weight: 600;
+    font-size: 1.02rem;
+    margin-bottom: .15rem;
+  }
+  .subject-term{
+    color: var(--muted);
+    font-size: .82rem;
+    margin-bottom: .6rem;
+  }
+  .subject-meta{
+    color: var(--muted);
+    font-size: .85rem;
+    line-height: 1.5;
+  }
+  .subject-meta strong{
+    color: #c7c9e6;
+    font-weight: 500;
+  }
+
+  .semester-panel{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: .9rem;
+    padding: 1rem;
+    height: 100%;
+  }
+
+  .semester-label{
+    color: var(--muted);
+    font-size: .75rem;
+    letter-spacing: .08em;
+    margin-bottom: .7rem;
+    padding-left: .3rem;
+  }
+
+  .semester-item{
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    font-size: .92rem;
+    padding: .55rem .8rem;
+    border-radius: .5rem;
+    margin-bottom: .2rem;
+  }
+  .semester-item:hover{ background: var(--bg-soft); }
+  .semester-item.active{
+    background: var(--accent);
+    color: #fff;
+    font-weight: 500;
+  }
+
+  @media (max-width: 991.98px){
+    .semester-panel{
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: .5rem;
+      padding: .8rem;
+    }
+    .semester-label{ display: none; }
+    .semester-item{
+      width: auto;
+      white-space: nowrap;
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 575.98px){
+    .navbar-academicbox .nav-link-academic span.link-text{ display: none; }
+    .btn-entrar span.link-text{ display: inline; }
+    .page-title{ font-size: 1.6rem; }
+  }

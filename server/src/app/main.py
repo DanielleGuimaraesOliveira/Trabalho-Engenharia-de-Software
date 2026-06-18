@@ -1,4 +1,5 @@
 from flask_openapi3 import OpenAPI, Info
+from flask_cors import CORS
 from src.infra.db.base import Base
 from src.infra.db.session import engine, SessionLocal
 
@@ -31,6 +32,7 @@ info = Info(title="API Reviews", version="1.0.0")
 
 app = OpenAPI(__name__, info=info)
 
+CORS(app)
 @app.get("/")
 def home():
     return { "message": "API funcionando"}, 200
