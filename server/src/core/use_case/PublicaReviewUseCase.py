@@ -21,6 +21,13 @@ class PublicarReviewUseCase:
         if not materia:
             raise Exception("Matéria não encontrada")
 
-        review = Review(comentario=dto.comentario, nota = dto.nota, id_aluno = dto.id_aluno, id_materia = dto.id_materia)
+        review = Review(
+            comentario=dto.comentario,
+            nota=dto.nota,
+            id_aluno=dto.id_aluno,
+            id_materia=dto.id_materia
+        )
 
         self.repositorio_review.salva(review)
+
+        return review

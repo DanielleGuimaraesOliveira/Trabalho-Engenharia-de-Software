@@ -17,9 +17,9 @@ review_tag = Tag(name="Review", description="Publicação e listagem de reviews"
 
 def register_review_routes(app, publica_use_case: PublicarReviewUseCase, lista_use_case: ListaReviewsUseCase):
     @app.post("/review", tags=[review_tag], responses={ "200": ReviewViewSchema, "400": ErrorSchema})
-    def publica_review(form: ReviewSchema):
+    def publica_review(body: ReviewSchema):
         try:
-            dto = ReviewDTO(comentario=form.comentario, nota=form.nota, id_aluno=form.id_aluno, id_materia=form.id_materia)
+            dto = ReviewDTO(comentario=body.comentario, nota=body.nota, id_aluno=body.id_aluno, id_materia=body.id_materia)
             review = publica_use_case.executa(dto)
 
             return apresenta_review(review), 200
