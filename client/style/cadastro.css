@@ -1,0 +1,163 @@
+  :root{
+    --bg:           #0b0c16;
+    --bg-soft:      #11132a;
+    --card:         #0f1128;
+    --border:       #262a4d;
+    --border-field: #2e3260;
+    --text:         #f2f2f7;
+    --muted:        #9a9cc0;
+    --accent:       #7c6cf0;
+    --accent-2:     #5ec8f2;
+  }
+
+  *, *::before, *::after{ box-sizing: border-box; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Navbar ── */
+  .navbar-academicbox{
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--border);
+    padding: .9rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-mark{
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    flex-shrink: 0;
+  }
+  .brand-name{
+    font-weight: 600;
+    font-size: 1.15rem;
+  }
+  .nav-link-academic{
+    color: var(--text);
+    opacity: .8;
+    font-size: .92rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .4rem .6rem;
+    text-decoration: none;
+  }
+  .nav-link-academic:hover{ opacity: 1; color: var(--text); }
+  .btn-entrar-nav{
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    font-size: .92rem;
+    font-weight: 500;
+    padding: .45rem 1.1rem;
+    border-radius: .5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    text-decoration: none;
+  }
+  .btn-entrar-nav:hover{ background: #6b5ce0; color: #fff; }
+
+  /* ── Page center ── */
+  .page-wrapper{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1rem;
+  }
+
+  .page-title{
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.6rem;
+    text-align: center;
+  }
+
+  /* ── Card ── */
+  .register-card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem 2.2rem;
+    width: 100%;
+    max-width: 540px;
+  }
+
+  .form-label-academic{
+    color: var(--text);
+    font-size: .95rem;
+    font-weight: 500;
+    margin-bottom: .45rem;
+    display: block;
+  }
+
+  .form-control-academic{
+    background: var(--bg-soft);
+    border: 1px solid var(--border-field);
+    color: var(--text);
+    border-radius: .65rem;
+    padding: .7rem 1rem;
+    font-size: .95rem;
+    width: 100%;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .form-control-academic::placeholder{ color: var(--muted); }
+  .form-control-academic:focus{
+    outline: none;
+    background: var(--bg-soft);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 .2rem rgba(124,108,240,.25);
+    color: var(--text);
+  }
+
+  .field-group{ margin-bottom: 1.1rem; }
+  .field-group:last-of-type{ margin-bottom: 1.4rem; }
+
+  .btn-cadastrar{
+    width: 100%;
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .75rem;
+    border-radius: 2rem;
+    transition: background .18s, color .18s;
+    cursor: pointer;
+  }
+  .btn-cadastrar:hover{
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* ── Footer hint ── */
+  .login-hint{
+    margin-top: 1.4rem;
+    font-size: .93rem;
+    color: var(--muted);
+    text-align: center;
+  }
+  .login-hint a{
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .login-hint a:hover{ text-decoration: underline; }
+
+  /* ── Responsive ── */
+  @media (max-width: 575.98px){
+    .nav-link-academic span{ display: none; }
+    .register-card{ padding: 1.5rem 1.1rem; }
+    .page-title{ font-size: 1.6rem; }
+  }
