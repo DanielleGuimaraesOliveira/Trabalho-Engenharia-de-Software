@@ -2,9 +2,11 @@
 
 ## Tecnologias
 
-- Python 3.12
-- Flask
-- SQLAlchemy
+* Python 3.12
+* Flask
+* SQLAlchemy
+* SQLite
+* HTML, CSS e JavaScript
 
 ---
 
@@ -72,10 +74,61 @@ pip install -r requirements.txt
 
 ---
 
-## 6. Rodar aplicação
+## 6. Executar a API
 
 ```bash
 python -m src.app.main
 ```
 
+Ao iniciar a aplicação pela primeira vez, o SQLAlchemy criará automaticamente as tabelas do banco de dados.
+
+A API ficará disponível em:
+
+```text
+http://localhost:5000
+```
+
+ou, em um Codespace:
+
+```text
+https://<nome-do-codespace>-5000.app.github.dev
+```
+
 ---
+
+## 7. Executar o Frontend
+
+Abra um novo terminal e entre na pasta do frontend:
+
+```bash
+cd client
+```
+
+### Utilizando a extensão Live Server (VS Code)
+
+Clique com o botão direito em `index.html` e selecione:
+
+```text
+Open with Live Server
+```
+
+### Utilizando Python
+
+```bash
+python -m http.server 5500
+```
+
+O frontend ficará disponível em:
+
+```text
+http://localhost:5500
+```
+
+ou, em um Codespace:
+
+```text
+https://<nome-do-codespace>-5500.app.github.dev
+```
+
+---
+
