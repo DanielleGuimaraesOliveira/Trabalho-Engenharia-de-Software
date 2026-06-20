@@ -28,7 +28,7 @@ class TestCriaAlunoUseCase:
     def test_cria_aluno_with_valid_data(self):
         """Test creating a student with valid data"""
         # Arrange
-        dto = AlunoDTO(nome="João Silva", email="joao@example.com", senha="senha123")
+        dto = AlunoDTO(nome="João Silva", email="joao@aluno.puc-rio.br", senha="senha123")
         self.mock_hash_service.hash.return_value = "hashed_password"
         self.mock_repository.salva.return_value = None
         
@@ -37,14 +37,14 @@ class TestCriaAlunoUseCase:
         
         # Assert
         assert result.nome == "João Silva"
-        assert result.email == "joao@example.com"
+        assert result.email == "joao@aluno.puc-rio.br"
         self.mock_hash_service.hash.assert_called_once_with("senha123")
         self.mock_repository.salva.assert_called_once()
     
     def test_cria_aluno_hash_password(self):
         """Test that password is hashed during creation"""
         # Arrange
-        dto = AlunoDTO(nome="Maria", email="maria@example.com", senha="pass123")
+        dto = AlunoDTO(nome="Maria", email="maria@aluno.puc-rio.br", senha="pass123")
         hashed = "hashed_pass123"
         self.mock_hash_service.hash.return_value = hashed
         
@@ -59,7 +59,7 @@ class TestCriaAlunoUseCase:
     def test_cria_aluno_repository_called(self):
         """Test that repository save method is called"""
         # Arrange
-        dto = AlunoDTO(nome="Pedro", email="pedro@example.com", senha="pwd")
+        dto = AlunoDTO(nome="Pedro", email="pedro@aluno.puc-rio.br", senha="pwd")
         self.mock_hash_service.hash.return_value = "hashed"
         
         # Act
@@ -69,7 +69,7 @@ class TestCriaAlunoUseCase:
         self.mock_repository.salva.assert_called_once()
         saved_aluno = self.mock_repository.salva.call_args[0][0]
         assert saved_aluno.nome == "Pedro"
-        assert saved_aluno.email == "pedro@example.com"
+        assert saved_aluno.email == "pedro@aluno.puc-rio.br"
 
 
 class TestAutenticaAlunoUseCase:
@@ -89,8 +89,8 @@ class TestAutenticaAlunoUseCase:
     def test_autentica_aluno_with_valid_credentials(self):
         """Test authentication with valid credentials"""
         # Arrange
-        dto = LoginDTO(email="joao@example.com", senha="senha123")
-        aluno = Aluno(nome="João", email="joao@example.com", senhaHash="hashed_senha123")
+        dto = LoginDTO(email="joao@aluno.puc-rio.br", senha="senha123")
+        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br", senhaHash="hashed_senha123")
         aluno.id = 1
         
         self.mock_repository.encontra_por_email.return_value = aluno
@@ -102,14 +102,14 @@ class TestAutenticaAlunoUseCase:
         
         # Assert
         assert result == {"token": "token_abc123"}
-        self.mock_repository.encontra_por_email.assert_called_once_with("joao@example.com")
+        self.mock_repository.encontra_por_email.assert_called_once_with("joao@aluno.puc-rio.br")
         self.mock_hash_service.verificar.assert_called_once()
         self.mock_token_service.gerar_token.assert_called_once_with(1)
     
     def test_autentica_aluno_email_not_found(self):
         """Test authentication with non-existent email"""
         # Arrange
-        dto = LoginDTO(email="nonexistent@example.com", senha="senha123")
+        dto = LoginDTO(email="nonexistent@aluno.puc-rio.br", senha="senha123")
         self.mock_repository.encontra_por_email.return_value = None
         
         # Act & Assert
@@ -120,8 +120,8 @@ class TestAutenticaAlunoUseCase:
     def test_autentica_aluno_invalid_password(self):
         """Test authentication with invalid password"""
         # Arrange
-        dto = LoginDTO(email="joao@example.com", senha="wrong_password")
-        aluno = Aluno(nome="João", email="joao@example.com", senhaHash="hashed_senha123")
+        dto = LoginDTO(email="joao@aluno.puc-rio.br", senha="wrong_password")
+        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br", senhaHash="hashed_senha123")
         aluno.id = 1
         
         self.mock_repository.encontra_por_email.return_value = aluno
@@ -135,8 +135,8 @@ class TestAutenticaAlunoUseCase:
     def test_autentica_aluno_gera_token(self):
         """Test that token is generated for valid authentication"""
         # Arrange
-        dto = LoginDTO(email="joao@example.com", senha="senha123")
-        aluno = Aluno(nome="João", email="joao@example.com", senhaHash="hashed")
+        dto = LoginDTO(email="joao@aluno.puc-rio.br", senha="senha123")
+        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br", senhaHash="hashed")
         aluno.id = 42
         
         self.mock_repository.encontra_por_email.return_value = aluno
@@ -165,28 +165,28 @@ class TestAlunoRoutesIntegration:
         response = self.client.get("/")
         assert response.status_code == 200
     
-    @patch('src.app.routes.aluno_routes.cria_aluno_use_case')
-    def test_create_aluno_route_valid(self, mock_use_case):
+    @patch('src.core.use_case.CriaAlunoUseCase.CriaAlunoUseCase.executa')
+    def test_create_aluno_route_valid(self, mock_executa):
         """Test creating student via route with valid data"""
-        # Note: This test demonstrates the testing approach
-        # In practice, you would need proper test database setup
+        # Configura o mock para não retornar erro
+        mock_executa.return_value = None 
         pass
     
-    @patch('src.app.routes.aluno_routes.auth_use_case')
-    def test_login_route_valid(self, mock_use_case):
+    @patch('src.core.use_case.AutenticaAlunoUseCase.AutenticaAlunoUseCase.executa')
+    def test_login_route_valid(self, mock_executa):
         """Test login route with valid credentials"""
-        # Note: This test demonstrates the testing approach
+        # Configura o mock para simular um login de sucesso
+        mock_executa.return_value = {"token": "fake_token_123"}
         pass
-
 
 class TestAlunoDTO:
     """Tests for AlunoDTO"""
     
     def test_aluno_dto_creation(self):
         """Test creating AlunoDTO"""
-        dto = AlunoDTO(nome="João", email="joao@example.com", senha="senha123")
+        dto = AlunoDTO(nome="João", email="joao@aluno.puc-rio.br", senha="senha123")
         assert dto.nome == "João"
-        assert dto.email == "joao@example.com"
+        assert dto.email == "joao@aluno.puc-rio.br"
         assert dto.senha == "senha123"
 
 
@@ -195,8 +195,8 @@ class TestLoginDTO:
     
     def test_login_dto_creation(self):
         """Test creating LoginDTO"""
-        dto = LoginDTO(email="joao@example.com", senha="senha123")
-        assert dto.email == "joao@example.com"
+        dto = LoginDTO(email="joao@aluno.puc-rio.br", senha="senha123")
+        assert dto.email == "joao@aluno.puc-rio.br"
         assert dto.senha == "senha123"
 
 

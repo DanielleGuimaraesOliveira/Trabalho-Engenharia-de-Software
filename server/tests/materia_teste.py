@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.core.use_case.ListaMateriasUseCase import ListaMateriasUseCase
 from src.core.entities.Materia import Materia
+from src.core.enums.departamento import Departamento
 
 
 class TestListaMateriasUseCase:
@@ -24,8 +25,8 @@ class TestListaMateriasUseCase:
         """Test that listing subjects returns a list"""
         # Arrange
         materias = [
-            Materia(nome="Engenharia de Software", professor="Dr. Silva"),
-            Materia(nome="Banco de Dados", professor="Dra. Santos")
+            Materia(id=1, codigo="INF1001", nome="Engenharia de Software", departamento=Departamento.INFORMATICA),
+            Materia(id=2, codigo="INF1002", nome="Banco de Dados", departamento=Departamento.INFORMATICA)
         ]
         self.mock_repository.retorna_todas_as_materias.return_value = materias
         
@@ -52,7 +53,7 @@ class TestListaMateriasUseCase:
     def test_lista_materias_repository_called(self):
         """Test that repository method is called"""
         # Arrange
-        materias = [Materia(nome="Programação", professor="Prof. João")]
+        materias = [Materia(id=1, codigo="INF1003", nome="Programação", departamento=Departamento.INFORMATICA)]
         self.mock_repository.retorna_todas_as_materias.return_value = materias
         
         # Act
@@ -66,10 +67,10 @@ class TestListaMateriasUseCase:
         """Test listing multiple subjects"""
         # Arrange
         materias = [
-            Materia(nome="Cálculo I", professor="Prof. A"),
-            Materia(nome="Cálculo II", professor="Prof. B"),
-            Materia(nome="Álgebra Linear", professor="Prof. C"),
-            Materia(nome="Geometria", professor="Prof. D")
+            Materia(id=1, codigo="MAT1001", nome="Cálculo I", departamento=Departamento.MATEMATICA),
+            Materia(id=2, codigo="MAT1002", nome="Cálculo II", departamento=Departamento.MATEMATICA),
+            Materia(id=3, codigo="MAT1003", nome="Álgebra Linear", departamento=Departamento.MATEMATICA),
+            Materia(id=4, codigo="MAT1004", nome="Geometria", departamento=Departamento.MATEMATICA)
         ]
         self.mock_repository.retorna_todas_as_materias.return_value = materias
         
@@ -87,22 +88,19 @@ class TestMateriaEntity:
     
     def test_materia_creation(self):
         """Test creating a Materia instance"""
-        materia = Materia(nome="Python", professor="Dr. Silva")
+        materia = Materia(id=1, codigo="INF1004", nome="Python", departamento=Departamento.INFORMATICA)
         assert materia.nome == "Python"
-        assert materia.professor == "Dr. Silva"
-    
+        
     def test_materia_with_id(self):
         """Test Materia with id"""
-        materia = Materia(nome="JavaScript", professor="Dra. Santos")
-        materia.id = 1
+        materia = Materia(id=1, codigo="INF1005", nome="JavaScript", departamento=Departamento.INFORMATICA)
         assert materia.id == 1
     
     def test_materia_properties(self):
         """Test Materia properties"""
-        materia = Materia(nome="React", professor="Prof. João")
+        materia = Materia(id=1, codigo="INF1006", nome="React", departamento=Departamento.INFORMATICA)
         assert hasattr(materia, 'nome')
-        assert hasattr(materia, 'professor')
-
+        
 
 class TestMateriaRoutes:
     """Tests for materia routes"""
@@ -111,21 +109,10 @@ class TestMateriaRoutes:
         """Setup test fixtures"""
         pass
     
-    @patch('src.app.routes.materia_routes.lista_materias_use_case')
-    def test_lista_materias_route(self, mock_use_case):
-        """Test GET /materias route"""
-        # Arrange
-        from src.app.main import app
-        client = app.test_client()
-        
-        materias_mock = [
-            Mock(id=1, nome="Engenharia de Software", professor="Dr. Silva"),
-            Mock(id=2, nome="Banco de Dados", professor="Dra. Santos")
-        ]
-        mock_use_case.executa.return_value = materias_mock
-        
-        # This would need proper mocking of the app context
-        # Note: In a real scenario, you'd setup a test database or use fixtures
+    @patch('src.core.use_case.ListaMateriasUseCase.ListaMateriasUseCase.executa')
+    def test_lista_materias_route(self, mock_executa):
+        mock_executa.return_value = [] # Retorna uma lista vazia simulando o sucesso
+        pass
     
     def test_lista_materias_integration(self):
         """Integration test for listing subjects"""
@@ -153,8 +140,8 @@ class TestMateriaSchema:
         
         # Create mock materias
         materias = [
-            Mock(id=1, nome="Subject1", professor="Prof1"),
-            Mock(id=2, nome="Subject2", professor="Prof2")
+            Mock(id=1, nome="Subject1"),
+            Mock(id=2, nome="Subject2")
         ]
         
         # This function should format the subjects for API response
@@ -169,8 +156,7 @@ class TestMateriaRepositoryInterface:
     def test_materia_repository_find_by_id(self):
         """Test repository method to find subject by id"""
         mock_repo = Mock()
-        materia = Materia(nome="Python", professor="Dr. Silva")
-        materia.id = 1
+        materia = Materia(id=1, codigo="INF1004", nome="Python", departamento=Departamento.INFORMATICA)
         
         mock_repo.encontra_por_id.return_value = materia
         
@@ -182,8 +168,8 @@ class TestMateriaRepositoryInterface:
         """Test repository method to find all subjects"""
         mock_repo = Mock()
         materias = [
-            Materia(nome="Math", professor="Prof. A"),
-            Materia(nome="Physics", professor="Prof. B")
+            Materia(id=1, codigo="MAT1005", nome="Math", departamento=Departamento.MATEMATICA),
+            Materia(id=2, codigo="ENG1001", nome="Physics", departamento=Departamento.ENGENHARIA)
         ]
         
         mock_repo.retorna_todas_as_materias.return_value = materias

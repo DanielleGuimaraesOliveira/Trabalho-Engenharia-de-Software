@@ -12,6 +12,7 @@ from src.core.dto.ReviewDTO import ReviewDTO
 from src.core.entities.Review import Review
 from src.core.entities.Aluno import Aluno
 from src.core.entities.Materia import Materia
+from src.core.enums.departamento import Departamento
 
 
 class TestPublicarReviewUseCase:
@@ -33,15 +34,14 @@ class TestPublicarReviewUseCase:
         # Arrange
         dto = ReviewDTO(
             comentario="Excelente disciplina",
-            nota=9,
+            nota=5, # Nota ajustada para o limite 1-5
             id_aluno=1,
             id_materia=1
         )
         
-        aluno = Aluno(nome="João", email="joao@example.com", senhaHash="hash")
+        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br", senhaHash="hash")
         aluno.id = 1
-        materia = Materia(nome="Engenharia de Software", professor="Dr. Silva")
-        materia.id = 1
+        materia = Materia(id=1, codigo="INF1001", nome="Engenharia de Software", departamento=Departamento.INFORMATICA)
         
         self.mock_aluno_repo.encontra_por_id.return_value = aluno
         self.mock_materia_repo.encontra_por_id.return_value = materia
@@ -52,7 +52,7 @@ class TestPublicarReviewUseCase:
         
         # Assert
         assert result.comentario == "Excelente disciplina"
-        assert result.nota == 9
+        assert result.nota == 5
         assert result.id_aluno == 1
         assert result.id_materia == 1
         self.mock_aluno_repo.encontra_por_id.assert_called_once_with(1)
@@ -64,7 +64,7 @@ class TestPublicarReviewUseCase:
         # Arrange
         dto = ReviewDTO(
             comentario="Comentário",
-            nota=8,
+            nota=4,
             id_aluno=999,
             id_materia=1
         )
@@ -81,12 +81,12 @@ class TestPublicarReviewUseCase:
         # Arrange
         dto = ReviewDTO(
             comentario="Comentário",
-            nota=8,
+            nota=4,
             id_aluno=1,
             id_materia=999
         )
         
-        aluno = Aluno(nome="João", email="joao@example.com", senhaHash="hash")
+        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br", senhaHash="hash")
         aluno.id = 1
         
         self.mock_aluno_repo.encontra_por_id.return_value = aluno
@@ -102,15 +102,14 @@ class TestPublicarReviewUseCase:
         # Arrange
         dto = ReviewDTO(
             comentario="Bom",
-            nota=7,
+            nota=3,
             id_aluno=1,
             id_materia=1
         )
         
-        aluno = Aluno(nome="João", email="joao@example.com", senhaHash="hash")
+        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br", senhaHash="hash")
         aluno.id = 1
-        materia = Materia(nome="Math", professor="Prof")
-        materia.id = 1
+        materia = Materia(id=1, codigo="MAT1001", nome="Math", departamento=Departamento.MATEMATICA)
         
         self.mock_aluno_repo.encontra_por_id.return_value = aluno
         self.mock_materia_repo.encontra_por_id.return_value = materia
@@ -122,7 +121,7 @@ class TestPublicarReviewUseCase:
         self.mock_review_repo.salva.assert_called_once()
         saved_review = self.mock_review_repo.salva.call_args[0][0]
         assert saved_review.comentario == "Bom"
-        assert saved_review.nota == 7
+        assert saved_review.nota == 3
     
     def test_publica_review_validates_both_entities(self):
         """Test that both aluno and materia are validated"""
@@ -141,7 +140,6 @@ class TestPublicarReviewUseCase:
             self.use_case.executa(dto)
         
         self.mock_aluno_repo.encontra_por_id.assert_called_once()
-        # Materia repo should not be called if aluno is not found
         self.mock_materia_repo.encontra_por_id.assert_not_called()
 
 
@@ -160,12 +158,11 @@ class TestListaReviewsUseCase:
     def test_lista_reviews_by_materia(self):
         """Test listing reviews by subject"""
         # Arrange
-        materia = Materia(nome="Python", professor="Dr. Silva")
-        materia.id = 1
+        materia = Materia(id=1, codigo="INF1004", nome="Python", departamento=Departamento.INFORMATICA)
         
         reviews = [
-            Review(comentario="Ótimo", nota=10, id_aluno=1, id_materia=1),
-            Review(comentario="Muito bom", nota=9, id_aluno=2, id_materia=1)
+            Review(comentario="Ótimo", nota=5, id_aluno=1, id_materia=1),
+            Review(comentario="Muito bom", nota=4, id_aluno=2, id_materia=1)
         ]
         
         self.mock_materia_repo.encontra_por_id.return_value = materia
@@ -176,8 +173,8 @@ class TestListaReviewsUseCase:
         
         # Assert
         assert len(result) == 2
-        assert result[0].nota == 10
-        assert result[1].nota == 9
+        assert result[0].nota == 5
+        assert result[1].nota == 4
         self.mock_materia_repo.encontra_por_id.assert_called_once_with(1)
         self.mock_review_repo.encontra_por_materia.assert_called_once_with(1)
     
@@ -194,8 +191,7 @@ class TestListaReviewsUseCase:
     def test_lista_reviews_empty_list(self):
         """Test listing reviews when no reviews exist for subject"""
         # Arrange
-        materia = Materia(nome="Subject", professor="Prof")
-        materia.id = 1
+        materia = Materia(id=1, codigo="INF9099", nome="Subject", departamento=Departamento.INFORMATICA)
         
         self.mock_materia_repo.encontra_por_id.return_value = materia
         self.mock_review_repo.encontra_por_materia.return_value = []
@@ -209,13 +205,12 @@ class TestListaReviewsUseCase:
     def test_lista_reviews_multiple_reviews(self):
         """Test listing multiple reviews for a subject"""
         # Arrange
-        materia = Materia(nome="JavaScript", professor="Prof. João")
-        materia.id = 5
+        materia = Materia(id=5, codigo="INF1005", nome="JavaScript", departamento=Departamento.INFORMATICA)
         
         reviews = [
-            Review(comentario="Rev1", nota=8, id_aluno=1, id_materia=5),
-            Review(comentario="Rev2", nota=9, id_aluno=2, id_materia=5),
-            Review(comentario="Rev3", nota=10, id_aluno=3, id_materia=5)
+            Review(comentario="Rev1", nota=3, id_aluno=1, id_materia=5),
+            Review(comentario="Rev2", nota=4, id_aluno=2, id_materia=5),
+            Review(comentario="Rev3", nota=5, id_aluno=3, id_materia=5)
         ]
         
         self.mock_materia_repo.encontra_por_id.return_value = materia
@@ -236,12 +231,12 @@ class TestReviewEntity:
         """Test creating a Review instance"""
         review = Review(
             comentario="Excelente",
-            nota=10,
+            nota=5,
             id_aluno=1,
             id_materia=1
         )
         assert review.comentario == "Excelente"
-        assert review.nota == 10
+        assert review.nota == 5
         assert review.id_aluno == 1
         assert review.id_materia == 1
     
@@ -249,7 +244,7 @@ class TestReviewEntity:
         """Test Review with id"""
         review = Review(
             comentario="Good",
-            nota=8,
+            nota=4,
             id_aluno=1,
             id_materia=1
         )
@@ -260,7 +255,7 @@ class TestReviewEntity:
         """Test Review properties"""
         review = Review(
             comentario="Comment",
-            nota=7,
+            nota=3,
             id_aluno=1,
             id_materia=1
         )
@@ -277,18 +272,18 @@ class TestReviewDTO:
         """Test creating ReviewDTO"""
         dto = ReviewDTO(
             comentario="Test comment",
-            nota=8,
+            nota=4,
             id_aluno=1,
             id_materia=1
         )
         assert dto.comentario == "Test comment"
-        assert dto.nota == 8
+        assert dto.nota == 4
         assert dto.id_aluno == 1
         assert dto.id_materia == 1
     
     def test_review_dto_with_different_ratings(self):
         """Test ReviewDTO with different rating values"""
-        for nota in range(1, 11):
+        for nota in range(1, 6): # Ajustado para o loop testar de 1 a 5
             dto = ReviewDTO(
                 comentario="Comment",
                 nota=nota,
@@ -313,13 +308,13 @@ class TestReviewRoutes:
         # Actual HTTP tests would require full app setup with database
         pass
     
-    @patch('src.app.routes.review_routes.publica_use_case')
+    @patch('src.core.use_case.PublicaReviewUseCase.PublicarReviewUseCase.executa')
     def test_publica_review_route_structure(self, mock_use_case):
         """Test POST /review route structure"""
         # This test demonstrates the route testing approach
         pass
     
-    @patch('src.app.routes.review_routes.lista_use_case')
+    @patch('src.core.use_case.ListaTodasAsReviewsUseCase.ListaReviewsUseCase.executa')
     def test_lista_reviews_route_structure(self, mock_use_case):
         """Test GET /reviews route structure"""
         # This test demonstrates the route testing approach
@@ -343,7 +338,7 @@ class TestReviewSchema:
         review = Mock(
             id=1,
             comentario="Excelente",
-            nota=10,
+            nota=5,
             id_aluno=1,
             id_materia=1
         )
@@ -356,8 +351,8 @@ class TestReviewSchema:
         from src.app.schemas.Review_Schema import apresenta_reviews
         
         reviews = [
-            Mock(id=1, comentario="Rev1", nota=8, id_aluno=1, id_materia=1),
-            Mock(id=2, comentario="Rev2", nota=9, id_aluno=2, id_materia=1)
+            Mock(id=1, comentario="Rev1", nota=4, id_aluno=1, id_materia=1),
+            Mock(id=2, comentario="Rev2", nota=5, id_aluno=2, id_materia=1)
         ]
         
         result = apresenta_reviews(reviews)
@@ -371,8 +366,8 @@ class TestReviewRepositoryInterface:
         """Test repository method to find reviews by subject"""
         mock_repo = Mock()
         reviews = [
-            Review(comentario="Rev1", nota=8, id_aluno=1, id_materia=1),
-            Review(comentario="Rev2", nota=9, id_aluno=2, id_materia=1)
+            Review(comentario="Rev1", nota=4, id_aluno=1, id_materia=1),
+            Review(comentario="Rev2", nota=5, id_aluno=2, id_materia=1)
         ]
         
         mock_repo.encontra_por_materia.return_value = reviews
@@ -384,7 +379,7 @@ class TestReviewRepositoryInterface:
     def test_review_repository_save(self):
         """Test repository method to save review"""
         mock_repo = Mock()
-        review = Review(comentario="Test", nota=7, id_aluno=1, id_materia=1)
+        review = Review(comentario="Test", nota=3, id_aluno=1, id_materia=1)
         
         mock_repo.salva.return_value = None
         
