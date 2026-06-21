@@ -4,10 +4,12 @@ const senhaInput = document.getElementById("senha");
 const confirmarSenhaInput = document.getElementById("confirmarSenha");
 const btnCadastrar = document.getElementById("btnCadastrar");
 
-const API_URL = `${window.location.protocol}//${window.location.hostname.replace(
-    "-5500",
-    "-5000"
-)}`;
+// const API_URL = `${window.location.protocol}//${window.location.hostname.replace(
+//     "-5500",
+//     "-5000"
+// )}`;
+
+const API_URL = "http://localhost:5000";
 
 btnCadastrar.addEventListener("click", async () => {
 

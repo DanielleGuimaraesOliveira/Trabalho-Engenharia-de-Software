@@ -2,10 +2,12 @@ const emailInput = document.getElementById("email");
 const senhaInput = document.getElementById("senha");
 const btnLogin = document.getElementById("btnLogin");
 
-const API_URL = `${window.location.protocol}//${window.location.hostname.replace(
-    "-5500",
-    "-5000"
-)}`;
+// const API_URL = `${window.location.protocol}//${window.location.hostname.replace(
+//     "-5500",
+//     "-5000"
+// )}`;
+
+const API_URL = "http://localhost:5000";
 
 btnLogin.addEventListener("click", async () => {
 

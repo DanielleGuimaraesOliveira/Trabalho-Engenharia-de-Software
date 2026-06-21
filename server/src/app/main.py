@@ -19,6 +19,7 @@ from src.infra.security.JWTTokenService import JWTTokenService
 # USE CASES
 from src.core.use_case.CriaAlunoUseCase import CriaAlunoUseCase
 from src.core.use_case.ListaMateriasUseCase import ListaMateriasUseCase
+from src.core.use_case.ListaMateriaPorIdUseCase import ListaMateriaPorIdUseCase
 from src.core.use_case.AutenticaAlunoUseCase import AutenticaAlunoUseCase
 from src.core.use_case.PublicaReviewUseCase import PublicarReviewUseCase
 from src.core.use_case.ListaTodasAsReviewsUseCase import ListaReviewsUseCase
@@ -88,11 +89,14 @@ publica_review_use_case = (
 lista_reviews_use_case = (
     ListaReviewsUseCase(
         repositorio_review=review_repository,
-        repositorio_materia=materia_repository
+        repositorio_materia=materia_repository,
+        repositorio_aluno=aluno_repository
     )
 )
 
 lista_materias_use_case = (ListaMateriasUseCase(repositorio_materia=materia_repository))
+
+lista_materia_por_id_use_case = (ListaMateriaPorIdUseCase(repositorio_materia=materia_repository))
 
 # =========================================
 # ROUTES
@@ -100,7 +104,7 @@ lista_materias_use_case = (ListaMateriasUseCase(repositorio_materia=materia_repo
 
 register_aluno_routes( app, cria_aluno_use_case, auth_aluno_use_case)
 register_review_routes(app, publica_review_use_case, lista_reviews_use_case)
-register_materia_routes(app, lista_materias_use_case)
+register_materia_routes(app, lista_materias_use_case, lista_materia_por_id_use_case)
 
 # =========================================
 # RUN

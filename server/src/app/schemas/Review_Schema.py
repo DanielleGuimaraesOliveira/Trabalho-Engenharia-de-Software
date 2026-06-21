@@ -36,7 +36,8 @@ def apresenta_reviews(reviews: List[Review]) -> dict:
                 "comentario": review.comentario,
                 "nota": review.nota,
                 "id_aluno": review.id_aluno,
-                "id_materia": review.id_materia
+                "id_materia": review.id_materia,
+                "nome_aluno": getattr(review, "nome_aluno", None)
             }
             for review in reviews
         ]
