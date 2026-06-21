@@ -59,12 +59,25 @@ function renderizarHeader(materia) {
             <i class="bi bi-plus-lg"></i> Adicionar Review
         </button>
     `;
+document.getElementById("btnAdicionarReview")
+    .addEventListener("click", () => {
 
-    document
-        .getElementById("btnAdicionarReview")
-        .addEventListener("click", () => {
-            window.location.href = `nova-review.html?materia_id=${materiaId}`;
-        });
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+
+            localStorage.setItem(
+                "redirectAfterLogin",
+                `nova-review.html?materia_id=${materiaId}`
+            );
+
+            window.location.href = "login.html";
+            return;
+        }
+
+        window.location.href =
+            `nova-review.html?materia_id=${materiaId}`;
+    });
 }
 
 function renderizarReviews(reviews) {

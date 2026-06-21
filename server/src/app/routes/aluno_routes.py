@@ -11,7 +11,7 @@ from src.core.use_case.AutenticaAlunoUseCase import AutenticaAlunoUseCase
 aluno_tag = Tag(name="Aluno", description="Cadastro e autenticação de alunos")
 
 
-def register_aluno_routes(app, cria_aluno_use_case: CriaAlunoUseCase, auth_use_case: AutenticaAlunoUseCase, token_service=None, repositorio_aluno=None):
+def register_aluno_routes(app, cria_aluno_use_case, auth_use_case, aluno_repository, token_service):
     @app.post("/aluno", tags=[aluno_tag], responses={"200": AlunoViewSchema, "400": ErrorSchema })
     def cria_aluno(body: AlunoSchema):
         try:
@@ -34,24 +34,30 @@ def register_aluno_routes(app, cria_aluno_use_case: CriaAlunoUseCase, auth_use_c
         except Exception as error:
             return {"message": str(error)}, 401
 
-    @app.get("/aluno/me", tags=[aluno_tag], responses={"200": AlunoViewSchema, "401": ErrorSchema})
-    def aluno_logado():
+    @app.get("/aluno/me")
+    def me():
+
         try:
-            auth_header = request.headers.get("Authorization", "")
 
-            if not auth_header.startswith("Bearer "):
-                raise Exception("Token não informado")
+            auth = request.headers.get("Authorization")
 
-            token = auth_header.replace("Bearer ", "", 1)
+            if not auth:
+                return {"message": "Token não informado"}, 401
+
+            token = auth.replace("Bearer ", "")
 
             aluno_id = token_service.decodifica_token(token)
 
-            aluno = repositorio_aluno.encontra_por_id(aluno_id)
+            aluno = aluno_repository.encontra_por_id(aluno_id)
 
             if not aluno:
-                raise Exception("Aluno não encontrado")
+                return {"message": "Aluno não encontrado"}, 404
 
-            return {"id": aluno.id, "nome": aluno.nome, "email": aluno.email}, 200
+            return {
+                "id": aluno.id,
+                "nome": aluno.nome,
+                "email": aluno.email
+            }, 200
 
         except Exception as error:
             return {"message": str(error)}, 401

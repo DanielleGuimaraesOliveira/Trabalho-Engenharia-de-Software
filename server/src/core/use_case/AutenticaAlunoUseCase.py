@@ -21,4 +21,9 @@ class AutenticaAlunoUseCase:
 
         token = self.token_service.gerar_token(aluno.id)
 
-        return {"token": token}
+        return {
+            "token": token,
+            "id": aluno.id,
+            "nome": aluno.nome,
+            "email": aluno.email
+            }

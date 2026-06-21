@@ -66,24 +66,30 @@ btnNotaDown.addEventListener("click", () => {
 
 async function carregarNomeAluno() {
     try {
+        console.log("Token:", token);
+
         const response = await fetch(`${API_URL}/aluno/me`, {
-            headers: { "Authorization": `Bearer ${token}` }
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         });
 
+        const data = await response.json();
+
+        console.log("Status:", response.status);
+        console.log("Resposta:", JSON.stringify(data));
+
         if (!response.ok) {
-            throw new Error("Não autenticado");
+            throw new Error(data.message);
         }
 
-        const aluno = await response.json();
-
-        nomeAlunoLabel.textContent = aluno.nome;
+        nomeAlunoLabel.textContent = data.nome;
 
     } catch (error) {
         console.error("Erro ao carregar aluno:", error);
         nomeAlunoLabel.textContent = "Aluno";
     }
 }
-
 async function carregarNomeMateria() {
     try {
         const response = await fetch(`${API_URL}/materias/${materiaId}`);

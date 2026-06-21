@@ -23,6 +23,7 @@ btnLogin.addEventListener("click", async () => {
 
     if (response.ok) {
         localStorage.setItem("token", data.token);
+        console.log("Token salvo:", data.token);
 
         window.location.href = "../index.html";
 
