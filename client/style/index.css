@@ -121,6 +121,14 @@
     transform: translateY(-2px);
   }
 
+  .subject-card-link,
+.subject-card-link:hover,
+.subject-card-link:visited,
+.subject-card-link:active {
+    text-decoration: none;
+    color: inherit;
+}
+
   .subject-title{
     font-weight: 600;
     font-size: 1.02rem;
