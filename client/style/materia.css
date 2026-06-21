@@ -1,0 +1,113 @@
+.brand-link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.back-link{
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .9rem;
+}
+.back-link:hover{
+    color: var(--text);
+}
+
+.materia-header{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: .9rem;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.materia-title{
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-bottom: .35rem;
+}
+
+.materia-meta{
+    color: var(--muted);
+    font-size: .95rem;
+}
+.materia-meta strong{
+    color: var(--text);
+    font-weight: 500;
+}
+
+.btn-add-review{
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    font-size: .92rem;
+    font-weight: 500;
+    padding: .55rem 1.1rem;
+    border-radius: .6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    white-space: nowrap;
+}
+.btn-add-review:hover{
+    background: #6b5ce0;
+    color: #fff;
+}
+
+.review-list{
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.review-card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: .75rem;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.review-author{
+    font-weight: 600;
+    font-size: .98rem;
+    margin-bottom: .3rem;
+}
+
+.review-comment{
+    color: var(--muted);
+    font-size: .9rem;
+    line-height: 1.5;
+}
+
+.review-score{
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #f0a648;
+    white-space: nowrap;
+}
+
+.review-empty{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: .75rem;
+    padding: 1.25rem;
+    color: var(--muted);
+    text-align: center;
+}
+
+@media (max-width: 575.98px){
+    .materia-header{
+        flex-direction: column;
+    }
+    .btn-add-review{
+        width: 100%;
+        justify-content: center;
+    }
+}

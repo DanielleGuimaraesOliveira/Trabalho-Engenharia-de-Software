@@ -1,7 +1,9 @@
-const API_URL = `${window.location.protocol}//${window.location.hostname.replace(
-    "-5500",
-    "-5000"
-)}`;
+// const API_URL = `${window.location.protocol}//${window.location.hostname.replace(
+//     "-5500",
+//     "-5000"
+// )}`;
+
+const API_URL = "http://localhost:5000";
 
 const listaMaterias = document.getElementById("listaMaterias");
 const campoPesquisa = document.getElementById("campoPesquisa");
@@ -51,19 +53,21 @@ function renderizarMaterias(lista) {
 
         listaMaterias.innerHTML += `
             <div class="col-12 col-md-6">
-                <div class="subject-card">
-                    <div class="subject-title">
-                        ${materia.nome}
-                    </div>
+                <a href="html/materia.html?id=${materia.id}" class="subject-card-link">
+                    <div class="subject-card">
+                        <div class="subject-title">
+                            ${materia.nome}
+                        </div>
 
-                    <div class="subject-term">
-                        ${materia.codigo}
-                    </div>
+                        <div class="subject-term">
+                            ${materia.codigo}
+                        </div>
 
-                    <div class="subject-meta">
-                        ${materia.departamento}
+                        <div class="subject-meta">
+                            ${materia.departamento}
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         `;
     });

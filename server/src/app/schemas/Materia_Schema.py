@@ -12,6 +12,10 @@ class MateriaSchema(BaseModel):
 class ListagemMateriasSchema(BaseModel):
     materias: List[MateriaSchema]
 
+class MateriaBuscaPathSchema(BaseModel):
+    """Busca matéria por id (path param)."""
+    materia_id: int
+
 
 def apresenta_materia(materia: Materia):
     return {
