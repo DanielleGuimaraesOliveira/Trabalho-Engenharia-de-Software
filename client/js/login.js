@@ -1,6 +1,6 @@
 const emailInput = document.getElementById("email");
 const senhaInput = document.getElementById("senha");
-const btnLogin = document.getElementById("btnLogin");
+const btnLogin = document.getElementById("btnEntrar");
 
 // const API_URL = `${window.location.protocol}//${window.location.hostname.replace(
 //     "-5500",

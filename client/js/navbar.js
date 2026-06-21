@@ -14,7 +14,20 @@ async function carregarNavbar() {
     const token = localStorage.getItem("token");
     console.log("Token:", token);
 
-    const btnLogin = document.getElementById("btnLogin");
+    const homeLink = document.getElementById("homeLink");
+
+    if (homeLink) {
+        homeLink.href = window.location.pathname.includes("/html/")
+            ? "../index.html"
+            : "index.html";
+    }
+        const btnLogin = document.getElementById("btnLogin");
+
+    if (btnLogin) {
+        btnLogin.href = window.location.pathname.includes("/html/")
+            ? "login.html"
+            : "html/login.html";
+    }
     console.log("Botão:", btnLogin);
 
     if (token && btnLogin) {
