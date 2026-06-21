@@ -1,3 +1,8 @@
+from src.core.entities.Aluno import Aluno
+from src.core.dto.LoginDTO import LoginDTO
+from src.core.dto.AlunoDTO import AlunoDTO
+from src.core.use_case.AutenticaAlunoUseCase import AutenticaAlunoUseCase
+from src.core.use_case.CriaAlunoUseCase import CriaAlunoUseCase
 import pytest
 import sys
 from unittest.mock import Mock, MagicMock, patch
@@ -5,12 +10,6 @@ from pathlib import Path
 
 # Add the server directory to the Python path
 sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from src.core.use_case.CriaAlunoUseCase import CriaAlunoUseCase
-from src.core.use_case.AutenticaAlunoUseCase import AutenticaAlunoUseCase
-from src.core.dto.AlunoDTO import AlunoDTO
-from src.core.dto.LoginDTO import LoginDTO
-from src.core.entities.Aluno import Aluno
 
 
 class TestCriaAlunoUseCase:
@@ -45,7 +44,8 @@ class TestCriaAlunoUseCase:
     def test_cria_aluno_hash_password(self):
         """Test that password is hashed during creation"""
         # Arrange
-        dto = AlunoDTO(nome="Maria", email="maria@aluno.puc-rio.br", senha="pass123")
+        dto = AlunoDTO(
+            nome="Maria", email="maria@aluno.puc-rio.br", senha="pass123")
         hashed = "hashed_pass123"
         self.mock_hash_service.hash.return_value = hashed
 
@@ -60,7 +60,8 @@ class TestCriaAlunoUseCase:
     def test_cria_aluno_repository_called(self):
         """Test that repository save method is called"""
         # Arrange
-        dto = AlunoDTO(nome="Pedro", email="pedro@aluno.puc-rio.br", senha="pwd")
+        dto = AlunoDTO(
+            nome="Pedro", email="pedro@aluno.puc-rio.br", senha="pwd")
         self.mock_hash_service.hash.return_value = "hashed"
 
         # Act
@@ -148,7 +149,8 @@ class TestAutenticaAlunoUseCase:
         """Test that token is generated for valid authentication"""
         # Arrange
         dto = LoginDTO(email="joao@aluno.puc-rio.br", senha="senha123")
-        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br", senhaHash="hashed")
+        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br",
+                      senhaHash="hashed")
         aluno.id = 42
 
         self.mock_repository.encontra_por_email.return_value = aluno
@@ -198,7 +200,8 @@ class TestAlunoDTO:
 
     def test_aluno_dto_creation(self):
         """Test creating AlunoDTO"""
-        dto = AlunoDTO(nome="João", email="joao@aluno.puc-rio.br", senha="senha123")
+        dto = AlunoDTO(
+            nome="João", email="joao@aluno.puc-rio.br", senha="senha123")
         assert dto.nome == "João"
         assert dto.email == "joao@aluno.puc-rio.br"
         assert dto.senha == "senha123"

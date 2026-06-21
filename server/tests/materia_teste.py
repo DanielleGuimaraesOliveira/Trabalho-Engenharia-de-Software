@@ -1,3 +1,6 @@
+from src.core.enums.departamento import Departamento
+from src.core.entities.Materia import Materia
+from src.core.use_case.ListaMateriasUseCase import ListaMateriasUseCase
 import pytest
 import sys
 from unittest.mock import Mock, MagicMock, patch
@@ -6,10 +9,6 @@ from pathlib import Path
 # Add the server directory to the Python path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.core.use_case.ListaMateriasUseCase import ListaMateriasUseCase
-from src.core.entities.Materia import Materia
-from src.core.enums.departamento import Departamento
-
 
 class TestListaMateriasUseCase:
     """Tests for the ListSubjectsUseCase"""
@@ -17,7 +16,8 @@ class TestListaMateriasUseCase:
     def setup_method(self):
         """Setup mocks before each test"""
         self.mock_repository = Mock()
-        self.use_case = ListaMateriasUseCase(repositorio_materia=self.mock_repository)
+        self.use_case = ListaMateriasUseCase(
+            repositorio_materia=self.mock_repository)
 
     def test_lista_materias_returns_list(self):
         """Test that listing subjects returns a list"""
