@@ -1,4 +1,4 @@
-// const API_URL = "http://localhost:5000";
+const API_URL = "http://localhost:5000";
 
 const materiaHeader = document.getElementById("materiaHeader");
 const listaReviews = document.getElementById("listaReviews");
