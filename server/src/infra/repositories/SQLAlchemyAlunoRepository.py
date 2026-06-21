@@ -3,6 +3,7 @@ from src.core.interfaces.IAlunoRepository import IAlunoRepository
 from src.infra.db.model.aluno_model import AlunoModel
 from src.infra.mappers.AlunoMapper import AlunoMapper
 
+
 class SQLAlchemyAlunoRepositorio(IAlunoRepository):
     def __init__(self, session):
         self.session = session
@@ -15,16 +16,16 @@ class SQLAlchemyAlunoRepositorio(IAlunoRepository):
 
         return True
 
-    def encontra_por_id(self,id: int) -> Aluno:
-        model = (self.session.query(AlunoModel).filter_by(id=id).first())
+    def encontra_por_id(self, id: int) -> Aluno:
+        model = self.session.query(AlunoModel).filter_by(id=id).first()
 
         if not model:
             return None
 
         return AlunoMapper.to_entity(model)
 
-    def encontra_por_email(self,email: str) -> Aluno:
-        model = ( self.session.query(AlunoModel).filter_by(email=email).first())
+    def encontra_por_email(self, email: str) -> Aluno:
+        model = self.session.query(AlunoModel).filter_by(email=email).first()
 
         if not model:
             return None

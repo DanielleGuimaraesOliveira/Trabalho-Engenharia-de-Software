@@ -11,7 +11,7 @@ class CriaAlunoUseCase:
 
         senha_criptografada = self.senha_hash.hash(dto.senha)
 
-        aluno = Aluno(nome=dto.nome, email=dto.email,senhaHash=senha_criptografada)
+        aluno = Aluno(nome=dto.nome, email=dto.email, senhaHash=senha_criptografada)
 
         self.repositorio_aluno.salva(aluno)
 

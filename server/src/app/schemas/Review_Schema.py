@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 from src.core.entities.Review import Review
 
+
 class ReviewSchema(BaseModel):
     """publicação de reviews."""
 
@@ -12,14 +13,18 @@ class ReviewSchema(BaseModel):
     id_aluno: int
     id_materia: int
 
+
 class ReviewBuscaSchema(BaseModel):
     """Busca review por id."""
+
     materia_id: int
+
 
 class ListagemReviewsSchema(BaseModel):
     """Listagem de reviews."""
 
     reviews: List[ReviewSchema]
+
 
 class ReviewViewSchema(BaseModel):
     id: int
@@ -27,6 +32,7 @@ class ReviewViewSchema(BaseModel):
     nota: int
     id_aluno: int
     id_materia: int
+
 
 def apresenta_reviews(reviews: List[Review]) -> dict:
     return {
@@ -37,15 +43,12 @@ def apresenta_reviews(reviews: List[Review]) -> dict:
                 "nota": review.nota,
                 "id_aluno": review.id_aluno,
                 "id_materia": review.id_materia,
-                "nome_aluno": getattr(review, "nome_aluno", None)
+                "nome_aluno": getattr(review, "nome_aluno", None),
             }
             for review in reviews
         ]
     }
 
+
 def apresenta_review(review):
-    return {
-        "id": review.id,
-        "comentario": review.comentario,
-        "nota": review.nota
-    }
+    return {"id": review.id, "comentario": review.comentario, "nota": review.nota}

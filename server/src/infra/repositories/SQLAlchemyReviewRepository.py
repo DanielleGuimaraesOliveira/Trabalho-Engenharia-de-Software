@@ -3,7 +3,8 @@ from src.core.interfaces.IReviewRepository import IReviewRepository
 from src.infra.db.model.review_model import ReviewModel
 from src.infra.mappers.ReviewMapper import ReviewMapper
 
-class SQLAlchemyReviewRepositorio( IReviewRepository):
+
+class SQLAlchemyReviewRepositorio(IReviewRepository):
     def __init__(self, session):
         self.session = session
 
@@ -15,9 +16,9 @@ class SQLAlchemyReviewRepositorio( IReviewRepository):
 
         return True
 
-    def encontra_por_id( self, id: int) -> Review:
+    def encontra_por_id(self, id: int) -> Review:
 
-        model = (self.session.query(ReviewModel).filter_by(id=id).first())
+        model = self.session.query(ReviewModel).filter_by(id=id).first()
 
         if not model:
             return None
@@ -25,12 +26,11 @@ class SQLAlchemyReviewRepositorio( IReviewRepository):
         return ReviewMapper.to_entity(model)
 
     def encontra_por_materia(self, id_materia: int) -> list[Review]:
-        models = (self.session.query(ReviewModel).filter_by(id_materia=id_materia).all())
-        
+        models = self.session.query(ReviewModel).filter_by(id_materia=id_materia).all()
+
         return [ReviewMapper.to_entity(model) for model in models]
 
     def encontra_por_aluno(self, id_aluno: int) -> list[Review]:
-        models = (self.session.query(ReviewModel).filter_by(id_aluno=id_aluno).all())
+        models = self.session.query(ReviewModel).filter_by(id_aluno=id_aluno).all()
 
         return [ReviewMapper.to_entity(model) for model in models]
-    

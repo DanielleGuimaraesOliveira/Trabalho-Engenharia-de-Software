@@ -9,7 +9,7 @@ class ListaReviewsUseCase:
         self,
         repositorio_review: IReviewRepository,
         repositorio_materia: IMateriaRepository,
-        repositorio_aluno: IAlunoRepository
+        repositorio_aluno: IAlunoRepository,
     ):
 
         self.repositorio_review = repositorio_review

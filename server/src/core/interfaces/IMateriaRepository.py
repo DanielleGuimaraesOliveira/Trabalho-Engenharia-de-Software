@@ -5,7 +5,7 @@ from src.core.entities.Materia import Materia
 
 class IMateriaRepository(ABC):
     @abstractmethod
-    def encontra_por_id(self,id_materia: int) -> Materia:
+    def encontra_por_id(self, id_materia: int) -> Materia:
         pass
 
     @abstractmethod

@@ -10,7 +10,7 @@ class MateriaMapper:
         return MateriaModel(
             nome=materia.nome,
             codigo=materia.codigo,
-            departamento=materia.departamento.name
+            departamento=materia.departamento.name,
         )
 
     @staticmethod
@@ -19,5 +19,5 @@ class MateriaMapper:
             id=model.id,
             nome=model.nome,
             codigo=model.codigo,
-            departamento=Departamento[model.departamento]
+            departamento=Departamento[model.departamento],
         )

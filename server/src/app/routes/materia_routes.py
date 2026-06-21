@@ -4,13 +4,15 @@ from src.app.schemas.Materia_Schema import (
     MateriaSchema,
     MateriaBuscaPathSchema,
     apresenta_materias,
-    apresenta_materia
+    apresenta_materia,
 )
 
 materia_tag = Tag(name="Materia", description="Listagem de matérias")
 
 
-def register_materia_routes(app, lista_materias_use_case, lista_materia_por_id_use_case):
+def register_materia_routes(
+    app, lista_materias_use_case, lista_materia_por_id_use_case
+):
 
     @app.get("/materias", tags=[materia_tag], responses={"200": ListagemMateriasSchema})
     def lista_materias():
@@ -21,7 +23,7 @@ def register_materia_routes(app, lista_materias_use_case, lista_materia_por_id_u
     @app.get(
         "/materias/<int:materia_id>",
         tags=[materia_tag],
-        responses={"200": MateriaSchema}
+        responses={"200": MateriaSchema},
     )
     def busca_materia(path: MateriaBuscaPathSchema):
         try:
