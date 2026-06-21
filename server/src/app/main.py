@@ -94,7 +94,8 @@ lista_reviews_use_case = ListaReviewsUseCase(
     repositorio_aluno=aluno_repository,
 )
 
-lista_materias_use_case = ListaMateriasUseCase(repositorio_materia=materia_repository)
+lista_materias_use_case = ListaMateriasUseCase(
+    repositorio_materia=materia_repository)
 
 lista_materia_por_id_use_case = ListaMateriaPorIdUseCase(
     repositorio_materia=materia_repository
@@ -108,7 +109,8 @@ register_aluno_routes(
     app, cria_aluno_use_case, auth_aluno_use_case, aluno_repository, token_service
 )
 register_review_routes(app, publica_review_use_case, lista_reviews_use_case)
-register_materia_routes(app, lista_materias_use_case, lista_materia_por_id_use_case)
+register_materia_routes(app, lista_materias_use_case,
+                        lista_materia_por_id_use_case)
 
 # =========================================
 # RUN

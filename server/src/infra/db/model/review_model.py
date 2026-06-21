@@ -12,7 +12,8 @@ class ReviewModel(Base):
     comentario = Column(String(255), nullable=False)
     nota = Column(Integer, nullable=False)
     id_aluno = Column(Integer, ForeignKey("aluno.pk_aluno"), nullable=False)
-    id_materia = Column(Integer, ForeignKey("materia.pk_materia"), nullable=False)
+    id_materia = Column(Integer, ForeignKey(
+        "materia.pk_materia"), nullable=False)
 
     aluno = relationship("AlunoModel", back_populates="reviews")
     materia = relationship("MateriaModel", back_populates="reviews")

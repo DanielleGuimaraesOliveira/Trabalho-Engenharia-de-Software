@@ -61,7 +61,8 @@ class TestAppRoutes:
 
         # Routes should be in the app's URL map
         route_names = [rule.rule for rule in app.url_map.iter_rules()]
-        assert any("/aluno" in route or "/login" in route for route in route_names)
+        assert any(
+            "/aluno" in route or "/login" in route for route in route_names)
 
     def test_materia_routes_registered(self):
         """Test that materia routes are registered"""
@@ -75,7 +76,8 @@ class TestAppRoutes:
         from src.app.main import app
 
         route_names = [rule.rule for rule in app.url_map.iter_rules()]
-        assert any("/review" in route or "/reviews" in route for route in route_names)
+        assert any(
+            "/review" in route or "/reviews" in route for route in route_names)
 
 
 class TestDatabaseInitialization:

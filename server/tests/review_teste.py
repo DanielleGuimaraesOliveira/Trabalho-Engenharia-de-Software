@@ -1,3 +1,10 @@
+from src.core.enums.departamento import Departamento
+from src.core.entities.Materia import Materia
+from src.core.entities.Aluno import Aluno
+from src.core.entities.Review import Review
+from src.core.dto.ReviewDTO import ReviewDTO
+from src.core.use_case.ListaTodasAsReviewsUseCase import ListaReviewsUseCase
+from src.core.use_case.PublicaReviewUseCase import PublicarReviewUseCase
 import pytest
 import sys
 from unittest.mock import Mock, MagicMock, patch
@@ -5,14 +12,6 @@ from pathlib import Path
 
 # Add the server directory to the Python path
 sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from src.core.use_case.PublicaReviewUseCase import PublicarReviewUseCase
-from src.core.use_case.ListaTodasAsReviewsUseCase import ListaReviewsUseCase
-from src.core.dto.ReviewDTO import ReviewDTO
-from src.core.entities.Review import Review
-from src.core.entities.Aluno import Aluno
-from src.core.entities.Materia import Materia
-from src.core.enums.departamento import Departamento
 
 
 class TestPublicarReviewUseCase:
@@ -39,7 +38,8 @@ class TestPublicarReviewUseCase:
             id_materia=1,
         )
 
-        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br", senhaHash="hash")
+        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br",
+                      senhaHash="hash")
         aluno.id = 1
         materia = Materia(
             id=1,
@@ -67,7 +67,8 @@ class TestPublicarReviewUseCase:
     def test_publica_review_aluno_not_found(self):
         """Test publishing review when student is not found"""
         # Arrange
-        dto = ReviewDTO(comentario="Comentário", nota=4, id_aluno=999, id_materia=1)
+        dto = ReviewDTO(comentario="Comentário", nota=4,
+                        id_aluno=999, id_materia=1)
 
         self.mock_aluno_repo.encontra_por_id.return_value = None
 
@@ -79,9 +80,11 @@ class TestPublicarReviewUseCase:
     def test_publica_review_materia_not_found(self):
         """Test publishing review when subject is not found"""
         # Arrange
-        dto = ReviewDTO(comentario="Comentário", nota=4, id_aluno=1, id_materia=999)
+        dto = ReviewDTO(comentario="Comentário", nota=4,
+                        id_aluno=1, id_materia=999)
 
-        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br", senhaHash="hash")
+        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br",
+                      senhaHash="hash")
         aluno.id = 1
 
         self.mock_aluno_repo.encontra_por_id.return_value = aluno
@@ -97,7 +100,8 @@ class TestPublicarReviewUseCase:
         # Arrange
         dto = ReviewDTO(comentario="Bom", nota=3, id_aluno=1, id_materia=1)
 
-        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br", senhaHash="hash")
+        aluno = Aluno(nome="João", email="joao@aluno.puc-rio.br",
+                      senhaHash="hash")
         aluno.id = 1
         materia = Materia(
             id=1, codigo="MAT1001", nome="Math", departamento=Departamento.MATEMATICA
@@ -230,7 +234,8 @@ class TestReviewEntity:
 
     def test_review_creation(self):
         """Test creating a Review instance"""
-        review = Review(comentario="Excelente", nota=5, id_aluno=1, id_materia=1)
+        review = Review(comentario="Excelente", nota=5,
+                        id_aluno=1, id_materia=1)
         assert review.comentario == "Excelente"
         assert review.nota == 5
         assert review.id_aluno == 1
@@ -256,7 +261,8 @@ class TestReviewDTO:
 
     def test_review_dto_creation(self):
         """Test creating ReviewDTO"""
-        dto = ReviewDTO(comentario="Test comment", nota=4, id_aluno=1, id_materia=1)
+        dto = ReviewDTO(comentario="Test comment",
+                        nota=4, id_aluno=1, id_materia=1)
         assert dto.comentario == "Test comment"
         assert dto.nota == 4
         assert dto.id_aluno == 1
@@ -265,7 +271,8 @@ class TestReviewDTO:
     def test_review_dto_with_different_ratings(self):
         """Test ReviewDTO with different rating values"""
         for nota in range(1, 6):  # Ajustado para o loop testar de 1 a 5
-            dto = ReviewDTO(comentario="Comment", nota=nota, id_aluno=1, id_materia=1)
+            dto = ReviewDTO(comentario="Comment", nota=nota,
+                            id_aluno=1, id_materia=1)
             assert dto.nota == nota
 
 
@@ -313,7 +320,8 @@ class TestReviewSchema:
         from src.app.schemas.Review_Schema import apresenta_review
 
         # Create mock review
-        review = Mock(id=1, comentario="Excelente", nota=5, id_aluno=1, id_materia=1)
+        review = Mock(id=1, comentario="Excelente",
+                      nota=5, id_aluno=1, id_materia=1)
 
         result = apresenta_review(review)
         assert result is not None

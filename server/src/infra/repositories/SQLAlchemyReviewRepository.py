@@ -26,11 +26,13 @@ class SQLAlchemyReviewRepositorio(IReviewRepository):
         return ReviewMapper.to_entity(model)
 
     def encontra_por_materia(self, id_materia: int) -> list[Review]:
-        models = self.session.query(ReviewModel).filter_by(id_materia=id_materia).all()
+        models = self.session.query(ReviewModel).filter_by(
+            id_materia=id_materia).all()
 
         return [ReviewMapper.to_entity(model) for model in models]
 
     def encontra_por_aluno(self, id_aluno: int) -> list[Review]:
-        models = self.session.query(ReviewModel).filter_by(id_aluno=id_aluno).all()
+        models = self.session.query(
+            ReviewModel).filter_by(id_aluno=id_aluno).all()
 
         return [ReviewMapper.to_entity(model) for model in models]
