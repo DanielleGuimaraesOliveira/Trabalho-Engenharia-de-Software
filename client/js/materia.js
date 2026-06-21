@@ -93,7 +93,7 @@ function renderizarReviews(reviews) {
                     <div class="review-comment">${review.comentario}</div>
                 </div>
 
-                <div class="review-score">${review.nota}/10</div>
+                <div class="review-score">${review.nota}/5</div>
             </div>
         `;
     });

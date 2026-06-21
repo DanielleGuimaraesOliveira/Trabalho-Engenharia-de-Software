@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AcademicBox — Nova Review</title>
+
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../style/index.css">
+        <link rel="stylesheet" href="../style/nova-review.css">
+
+</head>
+<body>
+
+<nav class="navbar navbar-academicbox">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+    <a href="../index.html" class="d-flex align-items-center gap-2 brand-link">
+      <div class="brand-mark"></div>
+      <span class="brand-name">AcademicBox</span>
+    </a>
+    <div class="d-flex align-items-center gap-2">
+      <a href="../index.html" class="nav-link-academic">
+        <i class="bi bi-house"></i><span class="link-text">Home</span>
+      </a>
+      <a href="#" class="nav-link-academic">
+          <i class="bi bi-person"></i><span class="link-text">Perfil</span>
+        </a>
+      <a href="login.html" class="btn-entrar">
+        <i class="bi bi-box-arrow-in-right"></i><span class="link-text">Entrar</span>
+    </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container py-4">
+
+    <h1 class="page-title text-center mb-4">Posta Review</h1>
+
+    <div class="review-form-wrap">
+
+        <div class="mb-3 d-flex align-items-center justify-content-between">
+            <label class="form-label-academic mb-0" id="nomeAlunoLabel">Nome do Aluno</label>
+        </div>
+
+        <div class="comment-box">
+            <textarea
+                id="campoComentario"
+                class="form-control-comment"
+                placeholder="Escreva sua avaliação sobre a matéria, professor e dinâmica das aulas..."
+                rows="4"
+            ></textarea>
+
+            <div class="nota-stepper">
+                <button type="button" id="btnNotaUp" class="nota-btn" aria-label="Aumentar nota">
+                    <i class="bi bi-chevron-up"></i>
+                </button>
+
+                <div class="nota-display"><span id="notaValor">3</span>/5</div>
+
+                <button type="button" id="btnNotaDown" class="nota-btn" aria-label="Diminuir nota">
+                    <i class="bi bi-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+
+        <hr class="form-divider">
+
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div class="materia-label">
+                Matéria: <strong id="nomeMateria">—</strong>
+            </div>
+
+            <button type="button" id="btnPostar" class="btn-postar">
+                POSTAR
+            </button>
+        </div>
+
+        <div id="mensagemErro" class="alert alert-danger mt-3 d-none"></div>
+
+    </div>
+
+</div>
+
+<script src="../js/nova-review.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+.brand-link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.page-title{
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.review-form-wrap{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: .9rem;
+    padding: 1.5rem;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.form-label-academic{
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text);
+}
+
+.comment-box{
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: .75rem;
+    padding: 1rem 1.1rem;
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+}
+
+.form-control-comment{
+    background: transparent;
+    border: none;
+    color: var(--text);
+    resize: none;
+    flex: 1;
+    font-size: .95rem;
+}
+.form-control-comment::placeholder{
+    color: var(--muted);
+}
+.form-control-comment:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.nota-stepper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .25rem;
+    min-width: 70px;
+}
+
+.nota-btn{
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 1rem;
+    padding: .2rem;
+    line-height: 1;
+}
+.nota-btn:hover{
+    color: var(--text);
+}
+
+.nota-display{
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #f0a648;
+    white-space: nowrap;
+}
+
+.form-divider{
+    border-color: var(--border);
+    opacity: 1;
+    margin: 1.25rem 0;
+}
+
+.materia-label{
+    color: var(--muted);
+    font-size: .95rem;
+}
+.materia-label strong{
+    color: var(--text);
+    font-weight: 500;
+}
+
+.btn-postar{
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 600;
+    font-size: .85rem;
+    letter-spacing: .04em;
+    padding: .55rem 1.4rem;
+    border-radius: .55rem;
+}
+.btn-postar:hover{
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-postar:disabled{
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 575.98px){
+    .comment-box{
+        flex-direction: column;
+    }
+    .nota-stepper{
+        flex-direction: row;
+        min-width: 0;
+    }
+}
