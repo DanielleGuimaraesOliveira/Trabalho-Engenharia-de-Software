@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+// const API_URL = "http://localhost:5000";
 
 const materiaHeader = document.getElementById("materiaHeader");
 const listaReviews = document.getElementById("listaReviews");
@@ -59,20 +59,23 @@ function renderizarHeader(materia) {
             <i class="bi bi-plus-lg"></i> Adicionar Review
         </button>
     `;
-document.getElementById("btnAdicionarReview")
+    document
+    .getElementById("btnAdicionarReview")
     .addEventListener("click", () => {
 
         const token = localStorage.getItem("token");
 
         if (!token) {
 
-            localStorage.setItem(
-                "redirectAfterLogin",
-                `nova-review.html?materia_id=${materiaId}`
-            );
+            const modalElement =
+                document.getElementById("loginModal");
 
-            window.location.href = "login.html";
-            return;
+            const modal =
+                new bootstrap.Modal(modalElement);
+
+            modal.show();
+
+            return; // IMPORTANTE
         }
 
         window.location.href =
