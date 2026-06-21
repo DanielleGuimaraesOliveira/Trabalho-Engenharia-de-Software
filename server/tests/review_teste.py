@@ -19,10 +19,10 @@ class TestPublicarReviewUseCase:
     """Tests for the PublishReviewUseCase"""
     
     def setup_method(self):
-        """Setup mocks before each test"""
-        self.mock_aluno_repo = Mock()
-        self.mock_materia_repo = Mock()
         self.mock_review_repo = Mock()
+        self.mock_materia_repo = Mock()
+        self.mock_aluno_repo = Mock()
+
         self.use_case = PublicarReviewUseCase(
             repositorio_aluno=self.mock_aluno_repo,
             repositorio_materia=self.mock_materia_repo,
@@ -147,12 +147,14 @@ class TestListaReviewsUseCase:
     """Tests for the ListReviewsUseCase"""
     
     def setup_method(self):
-        """Setup mocks before each test"""
         self.mock_review_repo = Mock()
         self.mock_materia_repo = Mock()
+        self.mock_aluno_repo = Mock()
+
         self.use_case = ListaReviewsUseCase(
             repositorio_review=self.mock_review_repo,
-            repositorio_materia=self.mock_materia_repo
+            repositorio_materia=self.mock_materia_repo,
+            repositorio_aluno=self.mock_aluno_repo
         )
     
     def test_lista_reviews_by_materia(self):

@@ -101,7 +101,12 @@ class TestAutenticaAlunoUseCase:
         result = self.use_case.executa(dto)
         
         # Assert
-        assert result == {"token": "token_abc123"}
+        assert result == {
+            "token": "token_abc123",
+            "id": 1,
+            "nome": "João",
+            "email": "joao@aluno.puc-rio.br"
+        }
         self.mock_repository.encontra_por_email.assert_called_once_with("joao@aluno.puc-rio.br")
         self.mock_hash_service.verificar.assert_called_once()
         self.mock_token_service.gerar_token.assert_called_once_with(1)
