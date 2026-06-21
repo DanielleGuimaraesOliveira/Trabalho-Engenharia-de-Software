@@ -3,6 +3,7 @@ from src.core.interfaces.IMateriaRepository import IMateriaRepository
 from src.infra.db.model.materia_model import MateriaModel
 from src.infra.mappers.MateriaMapper import MateriaMapper
 
+
 class SQLAlchemyMateriaRepositorio(IMateriaRepository):
     def __init__(self, session):
         self.session = session
@@ -16,7 +17,7 @@ class SQLAlchemyMateriaRepositorio(IMateriaRepository):
         return True
 
     def encontra_por_id(self, id: int) -> Materia:
-        model = (self.session.query(MateriaModel).filter_by(id=id).first())
+        model = self.session.query(MateriaModel).filter_by(id=id).first()
 
         if not model:
             return None
@@ -24,7 +25,7 @@ class SQLAlchemyMateriaRepositorio(IMateriaRepository):
         return MateriaMapper.to_entity(model)
 
     def encontra_por_nome(self, nome: str) -> Materia:
-        model = (self.session.query(MateriaModel).filter_by(nome=nome).first())
+        model = self.session.query(MateriaModel).filter_by(nome=nome).first()
 
         if not model:
             return None
@@ -33,6 +34,6 @@ class SQLAlchemyMateriaRepositorio(IMateriaRepository):
 
     def retorna_todas_as_materias(self) -> list[Materia]:
 
-        models = (self.session.query(MateriaModel).all())
+        models = self.session.query(MateriaModel).all()
 
         return [MateriaMapper.to_entity(model) for model in models]

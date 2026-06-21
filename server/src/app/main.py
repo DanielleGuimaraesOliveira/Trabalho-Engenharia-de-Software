@@ -10,8 +10,13 @@ from src.infra.db.model.materia_model import MateriaModel
 
 # REPOSITORIES
 from src.infra.repositories.SQLAlchemyAlunoRepository import SQLAlchemyAlunoRepositorio
-from src.infra.repositories.SQLAlchemyReviewRepository import SQLAlchemyReviewRepositorio
-from src.infra.repositories.SQLAlchemyMateriaRepository import SQLAlchemyMateriaRepositorio
+from src.infra.repositories.SQLAlchemyReviewRepository import (
+    SQLAlchemyReviewRepositorio,
+)
+from src.infra.repositories.SQLAlchemyMateriaRepository import (
+    SQLAlchemyMateriaRepositorio,
+)
+
 # SECURITY
 from src.infra.security.HashService import HashService
 from src.infra.security.JWTTokenService import JWTTokenService
@@ -34,9 +39,13 @@ info = Info(title="API Reviews", version="1.0.0")
 app = OpenAPI(__name__, info=info)
 
 CORS(app)
+
+
 @app.get("/")
 def home():
-    return { "message": "API funcionando"}, 200
+    return {"message": "API funcionando"}, 200
+
+
 # =========================================
 # BANCO
 # =========================================
@@ -63,46 +72,41 @@ token_service = JWTTokenService()
 # USE CASES
 # =========================================
 
-cria_aluno_use_case = (
-    CriaAlunoUseCase(
-        repositorio_aluno=aluno_repository,
-        senha_hash=hash_service
-    )
+cria_aluno_use_case = CriaAlunoUseCase(
+    repositorio_aluno=aluno_repository, senha_hash=hash_service
 )
 
-auth_aluno_use_case = (
-    AutenticaAlunoUseCase(
+auth_aluno_use_case = AutenticaAlunoUseCase(
     repositorio_aluno=aluno_repository,
     token_service=token_service,
-    hash_service=hash_service
-)
-)
-
-publica_review_use_case = (
-    PublicarReviewUseCase(
-        repositorio_aluno=aluno_repository,
-        repositorio_materia=materia_repository,
-        repositorio_review=review_repository
-    )
+    hash_service=hash_service,
 )
 
-lista_reviews_use_case = (
-    ListaReviewsUseCase(
-        repositorio_review=review_repository,
-        repositorio_materia=materia_repository,
-        repositorio_aluno=aluno_repository
-    )
+publica_review_use_case = PublicarReviewUseCase(
+    repositorio_aluno=aluno_repository,
+    repositorio_materia=materia_repository,
+    repositorio_review=review_repository,
 )
 
-lista_materias_use_case = (ListaMateriasUseCase(repositorio_materia=materia_repository))
+lista_reviews_use_case = ListaReviewsUseCase(
+    repositorio_review=review_repository,
+    repositorio_materia=materia_repository,
+    repositorio_aluno=aluno_repository,
+)
 
-lista_materia_por_id_use_case = (ListaMateriaPorIdUseCase(repositorio_materia=materia_repository))
+lista_materias_use_case = ListaMateriasUseCase(repositorio_materia=materia_repository)
+
+lista_materia_por_id_use_case = ListaMateriaPorIdUseCase(
+    repositorio_materia=materia_repository
+)
 
 # =========================================
 # ROUTES
 # =========================================
 
-register_aluno_routes(app, cria_aluno_use_case, auth_aluno_use_case, aluno_repository, token_service)
+register_aluno_routes(
+    app, cria_aluno_use_case, auth_aluno_use_case, aluno_repository, token_service
+)
 register_review_routes(app, publica_review_use_case, lista_reviews_use_case)
 register_materia_routes(app, lista_materias_use_case, lista_materia_por_id_use_case)
 
@@ -112,8 +116,4 @@ register_materia_routes(app, lista_materias_use_case, lista_materia_por_id_use_c
 
 if __name__ == "__main__":
 
-    app.run(
-        host="0.0.0.0",
-        port=5000,
-        debug=True
-    )
+    app.run(host="0.0.0.0", port=5000, debug=True)

@@ -5,4 +5,3 @@ class Departamento(StrEnum):
     INFORMATICA = "Informática"
     MATEMATICA = "Matemática"
     ENGENHARIA = "Engenharia"
-    

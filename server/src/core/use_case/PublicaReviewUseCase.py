@@ -3,9 +3,15 @@ from src.core.interfaces.IAlunoRepository import IAlunoRepository
 from src.core.interfaces.IReviewRepository import IReviewRepository
 from src.core.interfaces.IMateriaRepository import IMateriaRepository
 
+
 class PublicarReviewUseCase:
 
-    def __init__(self, repositorio_aluno: IAlunoRepository, repositorio_materia: IMateriaRepository, repositorio_review: IReviewRepository):
+    def __init__(
+        self,
+        repositorio_aluno: IAlunoRepository,
+        repositorio_materia: IMateriaRepository,
+        repositorio_review: IReviewRepository,
+    ):
         self.repositorio_aluno = repositorio_aluno
         self.repositorio_materia = repositorio_materia
         self.repositorio_review = repositorio_review
@@ -25,7 +31,7 @@ class PublicarReviewUseCase:
             comentario=dto.comentario,
             nota=dto.nota,
             id_aluno=dto.id_aluno,
-            id_materia=dto.id_materia
+            id_materia=dto.id_materia,
         )
 
         self.repositorio_review.salva(review)

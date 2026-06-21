@@ -1,5 +1,6 @@
 from src.core.interfaces.IMateriaRepository import IMateriaRepository
 
+
 class ListaMateriasUseCase:
 
     def __init__(self, repositorio_materia: IMateriaRepository):

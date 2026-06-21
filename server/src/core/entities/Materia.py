@@ -1,11 +1,12 @@
 import re
 from src.core.enums.departamento import Departamento
 
+
 class Materia:
 
     PADRAO_CODIGO = r"^[A-Z]{3}\d{4}$"
 
-    def __init__(self, id: int, nome: str, codigo: str, departamento: str ):
+    def __init__(self, id: int, nome: str, codigo: str, departamento: str):
         self.__validaNome(nome)
         self.__validaCodigo(codigo)
         self.__validaDepartamento(departamento)
@@ -15,7 +16,6 @@ class Materia:
         self.codigo = codigo.upper()
         self.departamento = departamento
 
-
     def __validaNome(self, nome: str):
         if len(nome.strip()) < 3:
             raise ValueError("Nome da matéria inválido")
@@ -24,12 +24,8 @@ class Materia:
         codigo = codigo.strip().upper()
 
         if not re.match(self.PADRAO_CODIGO, codigo):
-            raise ValueError(
-                "O código deve seguir o padrão AAA0000"
-            )
+            raise ValueError("O código deve seguir o padrão AAA0000")
 
     def __validaDepartamento(self, departamento: Departamento):
         if not isinstance(departamento, Departamento):
-            raise ValueError(
-                "Departamento inválido"
-            )
+            raise ValueError("Departamento inválido")

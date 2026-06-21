@@ -2,6 +2,7 @@ from typing import List
 from pydantic import BaseModel
 from src.core.entities.Materia import Materia
 
+
 class MateriaSchema(BaseModel):
     id: int
     nome: str
@@ -12,8 +13,10 @@ class MateriaSchema(BaseModel):
 class ListagemMateriasSchema(BaseModel):
     materias: List[MateriaSchema]
 
+
 class MateriaBuscaPathSchema(BaseModel):
     """Busca matéria por id (path param)."""
+
     materia_id: int
 
 
@@ -22,7 +25,7 @@ def apresenta_materia(materia: Materia):
         "id": materia.id,
         "nome": materia.nome,
         "codigo": materia.codigo,
-        "departamento": materia.departamento.name
+        "departamento": materia.departamento.name,
     }
 
 
@@ -33,7 +36,7 @@ def apresenta_materias(materias: list[Materia]):
                 "id": materia.id,
                 "nome": materia.nome,
                 "codigo": materia.codigo,
-                "departamento": materia.departamento.name
+                "departamento": materia.departamento.name,
             }
             for materia in materias
         ]
